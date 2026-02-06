@@ -1,6 +1,6 @@
 # OnboardAI
 
-**AI-powered employee onboarding** — a single place for new hires to ask questions, see sync status from internal tools, and stay updated on competitor intelligence. Built as a hackathon demo with **Composio**, **You.com**, and **Render**.
+**AI-powered employee onboarding** — a single place for new hires to ask questions, see sync status from internal tools, and stay updated on competitor intelligence. Integrates **Composio**, **You.com**, and **Render**.
 
 ---
 
@@ -13,7 +13,7 @@ New employees at a company need fast, accurate answers about product, team, and 
 - **Q&A over company knowledge** — Ask in natural language; get answers grounded in internal docs (Notion pages, GitHub READMEs, Slack context) with citations.
 - **Sync visibility** — See when internal sources were last synced and trigger a refresh (Composio: Notion, GitHub, Slack).
 - **Competitor intel feed** — A feed of research on competitors (e.g. Intercom, Zendesk, Gorgias) powered by You.com, cached and surfaced in both the feed and in RAG answers.
-- **Usage dashboard** — For ops: view Render workspaces, services, and bandwidth (Phase 5) so the platform can be monitored without manual dashboard checks.
+- **Usage dashboard** — For ops: view workspaces, services, and bandwidth so the platform can be monitored without manual dashboard checks.
 
 **Velora** is a **fictional company** used in this demo. All data (Notion pages, GitHub repos, Slack messages, competitor names) is **synthetic**. The app simulates what a real company could do: connect real Composio/You.com/Render accounts and point them at real Notion/GitHub/Slack and real competitors; the architecture and flows stay the same.
 
@@ -30,7 +30,7 @@ New employees at a company need fast, accurate answers about product, team, and 
 | **Integrations** | Composio | One API for Notion, GitHub, Slack; connected accounts and tool execution without building N connectors. |
 | **Search / intel** | You.com | Web search API for competitor research; results cached in DB and reused in RAG context. |
 | **Scheduling** | Celery + Redis | Cron-like sync every 6 hours; Redis as broker/backend so the worker can run on Render or any host. |
-| **Hosting** | Render | Web service, background worker, and Postgres (with pgvector) from one repo and `render.yaml`; fits hackathon and small-team deploys. |
+| **Hosting** | Render | Web service, background worker, and Postgres (with pgvector) from one repo and `render.yaml`; suitable for small-team deploys. |
 
 Secrets (API keys) are **never** hardcoded: they are read from the environment (e.g. `.env` locally, Render env vars in production). This keeps the app safe for autonomy and CI/CD.
 
@@ -111,7 +111,7 @@ npm install
 npm run dev
 ```
 
-Open **http://localhost:3000**. The UI shows chat, sync status + “Trigger sync”, Competitive Intelligence Feed + “Refresh intel”, and Render Usage (or an error if `RENDER_API_KEY` is not set).
+Open **http://localhost:3000**. The UI shows chat, sync status + “Trigger sync”, Competitive Intelligence Feed + “Refresh intel”, and Platform Usage (or an error if `RENDER_API_KEY` is not set).
 
 **Optional — database and seed (for full RAG/sync/intel):**
 
@@ -138,12 +138,12 @@ Seed uses **fake Velora data** from `mock_data/` so the app works without real C
 
 | Key | Purpose |
 |-----|--------|
-| **GEMINI_API_KEY** | Phase 2 — RAG embeddings and answer generation ([Google AI Studio](https://aistudio.google.com/)). |
-| **COMPOSIO_API_KEY** / **COMPOSIO_PROJECT_ID** | Phase 3 — Notion, GitHub, Slack via [Composio](https://app.composio.dev). |
-| **YOU_API_KEY** | Phase 4 — Competitor search via [You.com API](https://api.you.com). |
-| **RENDER_API_KEY** | Phase 5 — Usage (workspaces, services, bandwidth) from Render Dashboard → Account Settings → API Keys. |
+| **GEMINI_API_KEY** | RAG embeddings and answer generation ([Google AI Studio](https://aistudio.google.com/)). |
+| **COMPOSIO_API_KEY** / **COMPOSIO_PROJECT_ID** | Notion, GitHub, Slack via [Composio](https://app.composio.dev). |
+| **YOU_API_KEY** | Competitor search via [You.com API](https://api.you.com). |
+| **RENDER_API_KEY** | Usage (workspaces, services, bandwidth) from Render Dashboard → Account Settings → API Keys. |
 
-Phase 1 (foundation + demo) works with no keys: seed uses fake Velora data and mock embeddings.
+The app works with no keys: seed uses fake Velora data and mock embeddings for local demos.
 
 ---
 
@@ -156,15 +156,13 @@ Phase 1 (foundation + demo) works with no keys: seed uses fake Velora data and m
 
 ---
 
-## Sponsor integrations (summary)
+## Integrations
 
-| Phase | Sponsor | Role |
-|-------|---------|------|
-| 1 | — | Foundation + fake Velora data |
-| 2 | **Gemini** | RAG embeddings + LLM |
-| 3 | **Composio** | Notion, GitHub, Slack sync + manual trigger |
-| 4 | **You.com** | Competitor intel feed + refresh + RAG context |
-| 5 | **Render** | Hosting + usage API (workspaces, services, bandwidth) |
-| 5 | **Composio** | Celery worker — sync every 6 hours |
+| Provider | Role |
+|----------|------|
+| **Gemini** | RAG embeddings + LLM |
+| **Composio** | Notion, GitHub, Slack sync + manual trigger; Celery worker sync every 6 hours |
+| **You.com** | Competitor intel feed + refresh + RAG context |
+| **Render** | Hosting + usage API (workspaces, services, bandwidth) |
 
-All of this is wired for a **fake company (Velora)** and synthetic data so a real company can drop in their own Composio/You.com/Render and get the same behavior with real data.
+The demo uses a **fictional company (Velora)** and synthetic data; you can connect real Composio, You.com, and Render accounts for production use.

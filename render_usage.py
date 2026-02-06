@@ -1,4 +1,4 @@
-"""Phase 5: Render usage — fetch services and bandwidth from Render API.
+"""Render usage — fetch services and bandwidth from Render API.
 
 API key must be set via RENDER_API_KEY env var only. Never log or expose the key.
 """

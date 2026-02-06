@@ -1,5 +1,6 @@
-/** Demo fallback data for OnboardAI (Phase 2+ will use API). */
+/** Demo fallback data for OnboardAI. */
 export const sampleQuestions = [
+  "Give me today's brief",
   "What is Velora's main product?",
   "Who are our main competitors?",
   "What's our tech stack?",

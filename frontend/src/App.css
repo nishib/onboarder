@@ -68,23 +68,23 @@
   cursor: not-allowed;
 }
 
-.sponsors {
+.app-footer {
   margin-top: auto;
   padding-top: 2rem;
-  font-size: 0.9rem;
-  color: #666;
+  font-size: 0.875rem;
+  color: #6b7280;
 }
 
-.sponsors a {
+.app-footer a {
   color: #5B21B6;
   text-decoration: none;
 }
 
-.sponsors a:hover {
+.app-footer a:hover {
   text-decoration: underline;
 }
 
-.sponsors span {
+.app-footer span {
   margin: 0 0.35rem;
 }
 
@@ -130,6 +130,23 @@
 .sample-q:hover {
   background: #f0f0f0;
   border-color: #5B21B6;
+}
+
+.sample-q-brief {
+  background: #5B21B6;
+  color: #fff;
+  border-color: #5B21B6;
+  font-weight: 600;
+}
+
+.sample-q-brief:hover:not(:disabled) {
+  background: #4c1d99;
+  border-color: #4c1d99;
+}
+
+.sample-q-brief:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 .message {
@@ -233,7 +250,205 @@
   cursor: not-allowed;
 }
 
-/* Competitive Intelligence Feed (Phase 4) */
+/* Brief UI (Today's Brief style) */
+.brief {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.brief-header {
+  padding: 1rem 1.25rem 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.brief-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.brief-subtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.brief-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem 0;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.brief-tab {
+  padding: 0.5rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.brief-tab:hover {
+  color: #5B21B6;
+  background: #f3e8ff;
+}
+
+.brief-tab-active {
+  color: #5B21B6;
+  background: #ede9fe;
+}
+
+.brief-panel {
+  padding: 1rem 1.25rem 1.25rem;
+  text-align: left;
+}
+
+.brief-section {
+  margin-bottom: 1rem;
+}
+
+.brief-section:last-child {
+  margin-bottom: 0;
+}
+
+.brief-section-title {
+  margin: 0 0 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #6b7280;
+}
+
+.brief-summary {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #374151;
+  white-space: pre-wrap;
+}
+
+.brief-summary-muted {
+  color: #6b7280;
+  font-style: italic;
+}
+
+.brief-key-changes {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #374151;
+}
+
+.brief-key-changes li {
+  margin-bottom: 0.25rem;
+}
+
+.brief-risks,
+.brief-muted {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.brief-sources-block {
+  margin-top: 0.5rem;
+}
+
+.brief-sources-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: 100%;
+  padding: 0.4rem 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #5B21B6;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.brief-sources-toggle:hover {
+  color: #4c1d99;
+  background: #f5f3ff;
+}
+
+.brief-sources-label {
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.brief-sources-count {
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.brief-sources-chevron {
+  margin-left: auto;
+  font-size: 0.7rem;
+  color: #9ca3af;
+}
+
+.brief-sources-empty {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+}
+
+.brief-sources-list {
+  list-style: none;
+  padding: 0.5rem 0 0 0;
+  margin: 0;
+  border-top: 1px solid #eee;
+}
+
+.brief-citation {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+  padding: 0.35rem 0;
+}
+
+.brief-citation:last-child {
+  margin-bottom: 0;
+}
+
+.brief-citation-source {
+  display: inline-block;
+  background: #5B21B6;
+  color: #fff;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  text-transform: capitalize;
+  font-size: 0.75rem;
+}
+
+.brief-citation-title {
+  font-weight: 600;
+  margin-right: 0.35rem;
+}
+
+.brief-citation-snippet {
+  display: block;
+  color: #666;
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+}
+
+/* Competitive Intelligence Feed */
 .intel-feed {
   margin-top: 2rem;
   padding-top: 1.5rem;
@@ -253,6 +468,123 @@
   font-size: 0.85rem;
   color: #666;
   margin-bottom: 0.5rem;
+}
+
+.intel-live-search {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.intel-live-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.intel-live-input:focus {
+  outline: none;
+  border-color: #5B21B6;
+}
+
+.intel-live-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  background: #059669;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.intel-live-btn:hover:not(:disabled) {
+  background: #047857;
+}
+
+.intel-live-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.intel-live-results {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.intel-live-heading {
+  font-size: 1rem;
+  margin: 0 0 0.75rem;
+  color: #334155;
+}
+
+.intel-live-error {
+  font-size: 0.9rem;
+  color: #b91c1c;
+  margin: 0;
+}
+
+.intel-live-block {
+  margin-top: 1rem;
+}
+
+.intel-live-block h4 {
+  font-size: 0.9rem;
+  margin: 0 0 0.5rem;
+  color: #5B21B6;
+}
+
+.intel-live-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.intel-live-item {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.intel-live-item:last-child {
+  border-bottom: none;
+}
+
+.intel-live-title {
+  font-weight: 600;
+  color: #1e293b;
+  display: block;
+}
+
+.intel-live-source {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-left: 0.5rem;
+}
+
+.intel-live-content {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #475569;
+}
+
+.intel-cached-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.intel-cached-heading span {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #334155;
 }
 
 .intel-refresh-btn {
@@ -333,7 +665,7 @@
   text-decoration: underline;
 }
 
-/* Render Usage (Phase 5) */
+/* Platform Usage */
 .render-usage {
   margin-top: 2rem;
   padding-top: 1.5rem;
