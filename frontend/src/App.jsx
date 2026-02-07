@@ -51,11 +51,12 @@ function App() {
       .catch(() => setIntelFeed([]))
   }, [])
 
-  useEffect(() => {
-    axios.get(API_URL ? `${API_URL}/api/render/usage` : '/api/render/usage')
-      .then(res => setRenderUsage(res.data))
-      .catch(() => setRenderUsage({ ok: false, error: 'Failed to load' }))
-  }, [])
+  // Platform Usage section disabled - uncomment to enable
+  // useEffect(() => {
+  //   axios.get(API_URL ? `${API_URL}/api/render/usage` : '/api/render/usage')
+  //     .then(res => setRenderUsage(res.data))
+  //     .catch(() => setRenderUsage({ ok: false, error: 'Failed to load' }))
+  // }, [])
 
   const triggerSync = async () => {
     setSyncTriggering(true)
@@ -253,7 +254,7 @@ function App() {
 
       <section className="intel-feed">
         <h2>Competitive Intelligence</h2>
-        <p className="intel-feed-sub">Live You.com web + news search and cached intel on Intercom, Zendesk, Gorgias. Set YOU_API_KEY for live search.</p>
+        <p className="intel-feed-sub">Live You.com web + news search and cached intel on Intercom, Zendesk, Gorgias.</p>
         <form className="intel-live-search" onSubmit={runLiveSearch}>
           <input
             type="text"
@@ -313,7 +314,7 @@ function App() {
                     )}
                   </>
                 ) : (
-                  <p className="intel-empty">No live results. Try another query or check YOU_API_KEY.</p>
+                  <p className="intel-empty">No live results. Try another query.</p>
                 )}
               </>
             )}
@@ -342,7 +343,7 @@ function App() {
             ))}
           </ul>
         ) : (
-          <p className="intel-empty">No competitive intelligence data yet. Click Refresh to update (requires YOU_API_KEY).</p>
+          <p className="intel-empty">No competitive intelligence data yet. Click Refresh to update.</p>
         )}
       </section>
 
