@@ -21,12 +21,17 @@ export const mockAnswers = {
       {
         source: "notion",
         title: "Velora Product Strategy 2024",
-        snippet: "AI-powered customer support for e-commerce...",
+        snippet: "AI-powered customer support platform for e-commerce. Key features: automated ticket routing, sentiment analysis, multi-language support. Target: Shopify merchants with 100+ support tickets/month. Reduces resolution time by 80% through ML-based response suggestions...",
       },
       {
         source: "github",
-        title: "velora-api README",
-        snippet: "Core backend for Velora AI customer support platform...",
+        title: "velora-api/README.md",
+        snippet: "Core backend for Velora AI customer support platform. Built with FastAPI, PostgreSQL, and pgvector for semantic search. Uses Gemini for embeddings and response generation. Key modules: RAG pipeline, ticket classifier, response generator...",
+      },
+      {
+        source: "slack",
+        title: "#product - Sarah Chen",
+        snippet: "Just shipped v2.0 with the new AI auto-response feature! Early beta customers reporting 85% reduction in manual ticket handling. Next: multi-channel support (email, SMS, WhatsApp).",
       },
     ],
   },
@@ -36,13 +41,18 @@ export const mockAnswers = {
     citations: [
       {
         source: "notion",
-        title: "Competitive Landscape Analysis",
-        snippet: "Main competitors: Intercom, Zendesk, Gorgias...",
+        title: "Competitive Analysis Q1 2024",
+        snippet: "Main competitors: Intercom ($50k+ ACV, enterprise), Zendesk (legacy, slow AI adoption), Gorgias ($300/mo, e-commerce focus). Our positioning: AI-native, affordable ($99-299/mo), faster implementation. Win rate against Gorgias: 67%...",
       },
       {
         source: "slack",
-        title: "#general - Lisa Wang",
-        snippet: "How is this different from Gorgias?...",
+        title: "#sales - Mike Rodriguez",
+        snippet: "Lost deal to Gorgias today but they're paying 3x what we quoted. Customer cited 'brand recognition' but admitted our AI features are better. We need more case studies to compete on trust.",
+      },
+      {
+        source: "github",
+        title: "velora-dashboard/CHANGELOG.md",
+        snippet: "v2.1.0 - Added competitive comparison widget showing Velora vs Gorgias/Intercom response times. Integrated benchmarking data from support ticket datasets...",
       },
     ],
   },

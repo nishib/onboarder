@@ -2,10 +2,9 @@ import { useState, useMemo } from 'react'
 
 /** Map citation source to domain tabs (for adaptable context) */
 const SOURCE_TO_DOMAINS = {
-  notion: ['Product', 'Company'],
-  github: ['Engineering'],
-  slack: ['Company', 'Onboarding'],
-  you_com: ['Product', 'Sales'],
+  notion: ['Product', 'Company', 'Sales'],
+  github: ['Engineering', 'Product'],
+  slack: ['Company', 'Onboarding', 'Sales'],
 }
 
 const DOMAIN_TABS = ['Overview', 'Product', 'Sales', 'Company', 'Onboarding', 'Engineering']
