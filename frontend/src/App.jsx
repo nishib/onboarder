@@ -110,6 +110,28 @@ function App() {
 
   const fetchDailyBrief = async () => {
     setBriefLoading(true)
+
+    // AUTOMATIC: Trigger competitive search for industry news/updates when fetching brief
+    const enhancedQuery = 'AI customer support industry news updates competitive landscape market trends recent'
+    setLiveSearchQuery(enhancedQuery)
+    setLiveSearchLoading(true)
+    setLiveSearchResults(null)
+
+    axios.get(API_URL ? `${API_URL}/api/intel/search` : '/api/intel/search', {
+      params: { q: enhancedQuery, count: 8, freshness: 'month' },
+    }).then(res => {
+      setLiveSearchResults(res.data)
+    }).catch(err => {
+      setLiveSearchResults({
+        web: [],
+        news: [],
+        query: enhancedQuery,
+        error: err.response?.data?.error || err.message || 'Search failed',
+      })
+    }).finally(() => {
+      setLiveSearchLoading(false)
+    })
+
     try {
       const res = await axios.get(API_URL ? `${API_URL}/api/brief` : '/api/brief', { timeout: 65000 })
       const brief = {
@@ -129,12 +151,68 @@ function App() {
     }
   }
 
+  const enhanceQueryForSearch = (question) => {
+    const q = question.toLowerCase().trim()
+    let qCleaned = q
+    const phrases = ['what is', 'what are', "what's", 'who is', 'who are', 'how does', 'tell me about', 'give me']
+    phrases.forEach(phrase => { qCleaned = qCleaned.replace(phrase, '') })
+    qCleaned = qCleaned.replace(/velora's|velora|our|the|\?/g, '').trim()
+
+    // Topic-based competitive query enhancement (matches backend logic)
+    if (/product|platform|solution|offering/.test(q)) {
+      return `AI customer support ${qCleaned} competition market alternatives comparison`
+    } else if (/pricing|price|cost|plan|subscription|tier/.test(q)) {
+      return `customer support software ${qCleaned} pricing comparison competitors cost analysis`
+    } else if (/feature|capability|function|tool|automation/.test(q)) {
+      return `AI customer support ${qCleaned} competitive analysis features comparison market`
+    } else if (/competitor|competition|rival|versus|vs|intercom|zendesk|gorgias/.test(q)) {
+      return `AI customer support ${qCleaned} competitive landscape market share comparison`
+    } else if (/tech stack|technology|architecture|infrastructure|framework|database/.test(q)) {
+      return `AI customer support platform ${qCleaned} technology stack architecture comparison industry standards`
+    } else if (/team|founder|employee|people|culture|hiring/.test(q)) {
+      return `AI customer support startup ${qCleaned} company team funding market`
+    } else if (/roadmap|future|plan|strategy|vision|upcoming/.test(q)) {
+      return `AI customer support industry ${qCleaned} trends roadmap competitive strategy market direction`
+    } else if (/sales|customer|client|deal|revenue|growth/.test(q)) {
+      return `AI customer support market ${qCleaned} sales strategy customer acquisition competitive positioning`
+    } else if (/onboard|implementation|setup|getting started|integration/.test(q)) {
+      return `AI customer support ${qCleaned} onboarding implementation best practices industry comparison`
+    } else if (/brief|summary|update|news|recent/.test(q)) {
+      return `AI customer support industry news updates competitive landscape market trends recent`
+    } else {
+      return `AI customer support ${qCleaned} market competition alternatives industry analysis`
+    }
+  }
+
   const handleAsk = async (q) => {
     const text = (typeof q === 'string' ? q : question).trim()
     if (!text) return
     setQuestion('')
     setMessages(prev => [...prev, { role: 'user', text }])
     setLoading(true)
+
+    // AUTOMATIC: Trigger live competitive search based on question topic
+    const enhancedQuery = enhanceQueryForSearch(text)
+    setLiveSearchQuery(enhancedQuery)
+    setLiveSearchLoading(true)
+    setLiveSearchResults(null)
+
+    // Run both the RAG query and live search in parallel
+    const searchPromise = axios.get(API_URL ? `${API_URL}/api/intel/search` : '/api/intel/search', {
+      params: { q: enhancedQuery, count: 8, freshness: 'month' },
+    }).then(res => {
+      setLiveSearchResults(res.data)
+    }).catch(err => {
+      setLiveSearchResults({
+        web: [],
+        news: [],
+        query: enhancedQuery,
+        error: err.response?.data?.error || err.message || 'Search failed',
+      })
+    }).finally(() => {
+      setLiveSearchLoading(false)
+    })
+
     try {
       const res = await axios.post(
         API_URL ? `${API_URL}/api/ask` : '/api/ask',
@@ -254,7 +332,7 @@ function App() {
 
       <section className="intel-feed">
         <h2>Competitive Intelligence</h2>
-        <p className="intel-feed-sub">Live You.com web + news search and cached intel on Intercom, Zendesk, Gorgias.</p>
+        <p className="intel-feed-sub">🤖 Automatic you.com web + news search runs when you ask questions. Cached intel on Intercom, Zendesk, Gorgias.</p>
         <form className="intel-live-search" onSubmit={runLiveSearch}>
           <input
             type="text"
